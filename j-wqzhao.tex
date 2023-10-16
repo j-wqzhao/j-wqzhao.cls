@@ -1,0 +1,50 @@
+\documentclass{j-wqzhao}
+\usepackage{lipsum}
+
+\addbibresource{j-wqzhao.bib}
+
+\title{How to Use the \texttt{j-wqzhao} \LaTeX{} Class}
+\author{Wuqiong Zhao \orcidlink{0000-0002-9550-7423}}
+\affiliation{Southeast University, Nanjing, China}
+\abstract{\lipsum[1]}
+\keywords{LaTeX}
+
+\issueinfo{1}{2}{2023}
+
+\begin{document}
+
+  \maketitle
+
+  \parstart{T}{eddy} bears are cute. \lipsum[1]
+  Hello \cite{zhao2023ompl}.
+  % \lipsum
+
+  \section{A Very Very Very Long Section Title That Expands Over Multiple Lines}
+
+  Hi, $1+1=2$, and
+  \begin{equation}
+    E=mc^2.
+  \end{equation}
+
+    \subsection{Subsection Title}
+
+      \subsubsection{Subsubsection Title}
+
+        \paragraph{Paragraph.} Here is a paragraph.
+
+  \begin{figure}[htbp]
+    \includegraphics[width=\linewidth]{example-image-a}
+    \caption{A figure.}
+  \end{figure}
+
+  In Table~\ref{tab:table}, we show an example of a simple table.
+  \begin{table}[htbp]
+    \caption{A table.}
+    \label{tab:table}
+  \end{table}
+
+  \lipsum
+
+  \printbibliography
+
+\end{document}
