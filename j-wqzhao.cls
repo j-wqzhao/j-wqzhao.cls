@@ -17,7 +17,20 @@
 
 \keys_define:nn { j-wqzhao }
   {
-    , unknown .code:n =
+    % load useful packages
+    , load pkgs .bool_set:N = \l__j_wqzhao_load_pkgs_bool
+    , load pkgs .default:n = true
+    , load~pkgs .bool_set:N = \l__j_wqzhao_load_pkgs_bool
+    , load~pkgs .default:n = true
+    % balance two columns
+    , flushend  .bool_set:N = \l__j_wqzhao_flushend_bool
+    , flushend  .default:n = true
+    , balance   .bool_set:N = \l__j_wqzhao_flushend_bool
+    , balance   .default:n = true
+    , pbalance  .bool_set:N = \l__j_wqzhao_flushend_bool
+    , pbalance  .default:n = true
+    % other options to pass on
+    , unknown   .code:n =
       {
         \iow_term:x
           {
@@ -70,11 +83,28 @@
     % \setmonofont [ Scale = 0.95 ] { Inconsolatazi4 }
     \setmonofont [ Scale = 0.95 ] { inconsolata }
   }
+% there's no italic/slanted for Inconsolata
+\@namedef{T1/zi4/m/it}{<->ssub*zi4/m/n}
+\@namedef{T1/zi4/b/it}{<->ssub*zi4/b/n}
+\@namedef{T1/zi4/bx/it}{<->ssub*zi4/b/n}
+\@namedef{T1/zi4/m/sl}{<->ssub*zi4/m/n}
+\@namedef{T1/zi4/b/sl}{<->ssub*zi4/b/n}
+\@namedef{T1/zi4/bx/sl}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/m/it}{<->ssub*zi4/m/n}
+\@namedef{TS1/zi4/b/it}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/bx/it}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/m/sl}{<->ssub*zi4/m/n}
+\@namedef{TS1/zi4/b/sl}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/bx/sl}{<->ssub*zi4/b/n}
+\@namedef{TU/inconsolata(0)/m/it}{<->ssub*inconsolata(0)/m/n}
+\@namedef{TU/inconsolata(0)/b/it}{<->ssub*inconsolata(0)/b/n}
+\@namedef{TU/inconsolata(0)/bx/it}{<->ssub*inconsolata(0)/b/n}
+\@namedef{TU/inconsolata(0)/m/sl}{<->ssub*inconsolata(0)/m/n}
+\@namedef{TU/inconsolata(0)/b/sl}{<->ssub*inconsolata(0)/b/n}
+\@namedef{TU/inconsolata(0)/bx/sl}{<->ssub*inconsolata(0)/b/n}
 
-% \sys_if_engine_pdftex:T
-%   {
-%     \RequirePackage [ libertine ] { newtxmath }
-%   }
+%% Text Formatting
+\RequirePackage { indentfirst }
 
 %% Graphics Settings
 \RequirePackage [ dvipsnames ] { xcolor }
@@ -123,7 +153,7 @@
 \RequirePackage [ labelfont = { bf, color = j@wqzhao@ThemeColor } ] { caption }
 
 %% Citation Settings
-\RequirePackage [ style = ieee, max names = 6 ] { biblatex }
+\RequirePackage [ style = ieee, max names = 6, min names = 6 ] { biblatex }
 \AtNextBibliography{\small}
 
 %% Initial
@@ -132,6 +162,18 @@
 \renewcommand{\LettrineFontHook}{\color{j@wqzhao@ThemeColor}\GoudyInfamily{}}
 \setcounter{DefaultLines}{3}
 \newcommand\parstart\lettrine
+
+%% Load Useful Packages
+\bool_if:NT \l__j_wqzhao_load_pkgs_bool
+  {
+    \RequirePackage { subfig }
+    \RequirePackage { siunitx }
+  }
+\bool_if:NT \l__j_wqzhao_flushend_bool
+  {
+    % \RequirePackage { flushend }
+    \RequirePackage { pbalance }
+  }
 
 \RequirePackage { hyperref }
 \hypersetup
@@ -272,7 +314,33 @@
               \fill[j@wqzhao@ThemeColor, path~fading = east] ([yshift = -2.55pt]abstract-a) rectangle ([yshift = -3.55pt]abstract-b);
             \end{tikzpicture}
         }
-
+      \par
+      \vspace{\baselineskip}
+      \begingroup
+        \small
+        PDF~Online:~
+        \href
+          {
+            https \c_colon_str //j.wqzhao.org/pdf/
+            \tl_use:N \g__j_wqzhao_issue_info_vol_tl
+            -
+            \tl_use:N \g__j_wqzhao_issue_info_no_tl
+          }
+          {
+            \color{black}
+            \texttt
+              {
+                j.wqzhao.org/pdf/
+                \tl_use:N \g__j_wqzhao_issue_info_vol_tl
+                -
+                \tl_use:N \g__j_wqzhao_issue_info_no_tl
+              }
+          }
+        \quad
+        (Date~of~Current~Version:~\today{})
+      \endgroup
+      \par
+      \vspace{\baselineskip}
     \end{strip}
 
     \hypersetup
